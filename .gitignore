@@ -1,3 +1,8 @@
 # Entorno virtual
 venv/
 
+# Data
+data/
+
+# Conf de visual studio
+.vscode

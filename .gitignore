@@ -6,3 +6,6 @@ data/
 
 # Conf de visual studio
 .vscode
+
+# Caché
+__pycache__/

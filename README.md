@@ -34,7 +34,7 @@ Insights:
 ![Distribución de edades](/outputs/figures/age_distribution.png)
 
 - Se han separado por grupos etarios los clientes, a lo cual se ha llegado a la conclusión de que los clientes con un abandono notorio son los que tienen entre 45 y 60 años.
-![Porcentaje de Exited por edad](outputs/figures/churn_by_ageGroup.png)
+![Porcentaje de Exited por grupo de edad](outputs/figures/churn_by_ageGroup.png)
 
 - El tenure no es un buen indicador de Exited, aunque de todas formas, dentro de los clientes que se han ido, lo datos son un poco más variados.
 ![Distribución de tenure por Exited](outputs/figures/tenure_distribution_by_exited.png)
@@ -42,4 +42,55 @@ Insights:
 - Dentro de este dataset casi todos los clientes tienen un Balance de 0, aunque existe una tendencia de tener un Balance de al rededor de los 125000
 ![Distribución de Balance](outputs/figures/balance_distribution.png)
 
--
+- Dentro de los clientes que se quedan en el banco, es más común que tengan un balance de 0, mientras que los clientes que se van suelen tener un balance de al rededor de 120000.
+![Distribución de Exited en Balance](outputs/figures/balance_distribution_for_exited.png)
+
+- Los que tienen balance se tienden a ir un 10% más que los que no lo tienen.
+![Porcentaje de Exited por Balance](outputs/figures/exited_by_balance.png)
+
+- La mejor cantidad de productos que debería tener un cliente, es de 2, ya que con esta cantidad es mucho menos probable que abandone el banco. Además, las peores cantidades de productos son 3 y 4.
+![Distribución de Exited por NumOfProducts](outputs/figures/churn_by_NumOfProducts.png)
+
+- No tiene relevancia tener o no tener tarjeta del banco.
+![Distribución Exited con Card](outputs/figures/exited_by_HasCrCard_pie.png)
+
+- Los miembros no activos tienden a irse de manera más frecuente.
+![Exited en IsActiveMember](outputs/figures/active_members_exited.png)
+
+- El salario estimado no tiene mucha incidencia dentro del abandono.
+![Distribución de Salary en Exited](outputs/figures/exited_by_EstimatedSalary.png)
+
+## ⚙️ Feature engineering
+- AgeGroup:
+Separación de grupos etarios con el fin de proporcionar mejor visión y segmentación, utilizando 4 grupos separados entre 18/29, 30/44, 45/59 y 60 hacia adelante. Obtiendo grupos de adultos jóvenes, adultos, mediana edad y senior.
+Gráfico base de esta decisión:
+![Porcentaje de Exited por grupo de edad](outputs/figures/churn_by_ageGroup.png)
+
+
+- HasBalance:
+Identifica de forma binaria si el cliente tiene balance =0 o >0.
+Gráfico base de esta decisión:
+![Distribución de Exited por NumOfProducts](outputs/figures/churn_by_NumOfProducts.png)
+
+- Age_x_NumOfProducts_score:
+Genera un puntaje relacionando el grupo al que pertenece y su cantidad de productos. Es el producto de la multiplicación de valores no lineales, por lo que se han estimado valores diferentes para cada grupo y cada cantidad de productos.
+Gráficos base de esta decisión:
+![Porcentaje de Exited por grupo de edad](outputs/figures/churn_by_ageGroup.png)
+![Distribución de Exited por NumOfProducts](outputs/figures/churn_by_NumOfProducts.png)
+
+- BalanceAndActive:
+Puntaje indicador de que tanto el cliente utiliza el banco y si tiene balance además de ser activo.
+Gráficos base de esta decisión:
+![Porcentaje de Exited por Balance](outputs/figures/exited_by_balance.png)
+![Exited en IsActiveMember](outputs/figures/active_members_exited.png)
+
+- Score_AgeAndSalaryScore:
+Puntaje que sectoriza e identifica potencial financiero, diviendo el salario estimado por la edad.
+Gráficos base de esta decisión:
+![Porcentaje de Exited por grupo de edad](outputs/figures/churn_by_ageGroup.png)
+![Distribución de Salary en Exited](outputs/figures/exited_by_EstimatedSalary.png)
+
+
+
+
+

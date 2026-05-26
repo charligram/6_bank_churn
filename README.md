@@ -91,6 +91,90 @@ Gráficos base de esta decisión:
 ![Distribución de Salary en Exited](outputs/figures/exited_by_EstimatedSalary.png)
 
 
+## 🤖 ML
+Modelos utilizados:
+- LogisticRegression
+- RandomForestClassifier
+
+Se han realizado 2 versiónes para cada modelo, por lo cuál se presentarán cada uno por separado.
+
+### Modelo LogisticRegression
+#### V1
+Modelo de forma estándar y sin tuning. Se entiende que por un importante desbalanceo de clases, el modelo tiende a predecir que los usuarios no se irán, siendo un modelo muy conservador y que no atiende a las necesidades de la empresa. Debido a que el mayor objetivo es detectar quien abandona, no quien se queda.
+
+Métricas:
+Accuracy LogisticRegression_v1: 0.8485
+Precision LogisticRegression_v1: 0.6844262295081968
+F1 LogisticRegression_v1: 0.5243328100470958
+Recall LogisticRegression_v1: 0.42493638676844786
+Roc Auc LogisticRegression_v1: 0.688510508256657
+
+Matriz de confusión:
+![Confusion matrix in LR V1](outputs/confusion_matrixs/confusion_matrix_logisticregression_v1.png)
+
+#### V2
+Utilizando tuning como lo es el aumento de iteraciones y balanceo de clases, se obtiene un modelo bastante mejor, capaz de encontrar más posibles clientes con potencial de abandono, aunque permite un número ligeramente considerable de falsos positivos.
+
+Métricas:
+Accuracy LogisticRegression_v2: 0.7485
+Precision LogisticRegression_v2: 0.42445054945054944
+F1 LogisticRegression_v2: 0.5512934879571811
+Recall LogisticRegression_v2: 0.7862595419847328
+Roc Auc LogisticRegression_v2: 0.7627626272462557
+
+Matriz de confusión:
+![Confusion matrix in LR V2](outputs/confusion_matrixs/confusion_matrix_logisticregression_v2.png)
+
+### Modelo RandomForestClassifier
+#### V1
+Modelo de forma estándar y sin tuning. Debido al desbalanceo, identifica casi al 50% de los clientes que efectivamente se van, aunque obtiene mejores capacidades iniciales que LogisticRegression siguen siendo insuficientes.
+
+Métricas:
+Accuracy RandomForestClassifier_v1: 0.8635
+Precision RandomForestClassifier_v1: 0.75
+F1 RandomForestClassifier_v1: 0.5687203791469194
+Recall RandomForestClassifier_v1: 0.4580152671755725
+Roc Auc RandomForestClassifier_v1: 0.7103393075143576
+
+Matriz de confusión:
+![Confusion matrix in RFC V1](outputs/confusion_matrixs/confusion_matrix_randomforestclassifier_v1.png)
+
+#### V2
+Utilizando tuning, como lo es el aumento de n_estimators, balanceo de clases, etc. Se ha alcanzado un rendimiento superior considerando la cantidad de clientes identificados que se van, sin dar una cantidad muy comprometida de falsos positivos. Considerado como el mejor modelo en este ejercicio debido a su alineamiento con la intención final prioritaria de identificar a los clientes que se van.
+
+Métricas:
+Accuracy RandomForestClassifier_v2: 0.801
+Precision RandomForestClassifier_v2: 0.49592169657422513
+F1 RandomForestClassifier_v2: 0.6043737574552683
+Recall RandomForestClassifier_v2: 0.7735368956743003
+Roc Auc RandomForestClassifier_v2: 0.7906265685589922
+
+Matriz de confusión:
+![Confusion matrix in RFC V1](outputs/confusion_matrixs/confusion_matrix_randomforestclassifier_v2.png)
+
+## 🏆 Conclusiones finales y recomendaciones
+Los modelos generados de Machine Learning se considera que cumplen con los requisitos de la empresa, teniendo la capacidad de identificar en su gran mayoría a los clientes que potencialmente puedan abandonar los servicios, sobre todo en el modelo de RandomForestClassifier con su segunda versión la cual sigue teniendo muy buenas capacidades de detectar a los clientes que no son potenciales abandonadores.
+
+El análisis de los datos a traves de EDA permite identificar características que son más comunes en clientes que se van, además de brindar la posibilidad de generar las siguientes recomendaciones:
+
+1. Realizar campañas para obtener nuevos clientes principalmente en los países de Germany y Spain.
+
+2. Ofrecer importantes beneficios e incentivos para quedarse en el banco a los grupos etarios entre 45 y 59, siendo esta recomendación especialmente importante.
+
+3. Realizar una revisión de todos los clientes con 2 productos, identificar que productos son e incitar a los clientes a obtener esos 2 productos, dejando de lado la obtención de más. Debido a la alta tasa de abandono en 1, 3 y 4 productos.
+
+4. Realizar recordatorios a los clientes, que los ayude a ser más activos dentro del banco.
+
+Para terminar, se concluye que el análisis y trabajo generado en este dataset permite identificar las mayores características de los clientes que abandonan los servicios, obteniendo además un modelo de ML efectivo, ayudando de gran manera en la misión de fidelizar a los clientes.
+
+## Versión de python para el kernel
+- Python 3.11.9
+
+## Autor
+Carlos Rojas Villegas
+
+
+
 
 
 

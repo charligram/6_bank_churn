@@ -1,4 +1,14 @@
 def generate_age_numproducts_score(row):
+    """
+    Asigna un valor numérico a cada grupo etario, también para el número de productos. Devolver el producto de la multiplicación
+    cada número asignado.
+
+    Args:
+        row (pd.Series): Serie que hace alución a 1 registro o fila del DataFrame.
+
+    Returns:
+        (int): Score obtenido.
+    """
     if row["AgeGroup"] == "Young adult":
         age_score = 4
 
@@ -23,6 +33,15 @@ def generate_age_numproducts_score(row):
     return age_score * ptj_numproducts
 
 def generate_balance_and_active_score(row):
+    """
+    Generar puntaje generando una tasa de multiplicador del balance, dependiendo de si es un miembro activo o no.
+
+    Args:
+        row (pd.Series): Serie que hace alución a 1 registro o fila del DataFrame.
+
+    Returns:
+        (int): Producto del multiplicador y balance.
+    """
     if row["IsActiveMember"] == 1:
         multiplier = 1.2
     if row["IsActiveMember"] == 0:
@@ -34,6 +53,15 @@ def generate_balance_and_active_score(row):
 
 
 def generate_AgeAndSalary_score(row):
+    """
+    Generar puntaje que hace alución al potencial o capacidad de compra de un cliente.
+
+    Args:
+        row (pd.Series): Serie que hace alución a 1 registro o fila del DataFrame.
+        
+    Returns
+        (int): Resultado de la división de EstimatedSalary entre Age
+    """
     score = row["EstimatedSalary"] / row["Age"]
 
     return score

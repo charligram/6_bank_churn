@@ -18,47 +18,75 @@ En este dataset en concreto se ha revisado la existencia de datos nulos o textos
 ## 📈 EDA
 Insights:
 
-- Este dataset tiene un desbalance importante en el target (Exited), por lo que en el trabajo de ML será necesario ajustar pesos de clases
+- Este dataset tiene un desbalance importante en el target (Exited), por lo que en el trabajo de ML será necesario ajustar pesos de clases.
+
 ![Cuenta de clases Exited](/outputs/figures/exited_count.png)
 
+
 - El CreditScore no es un buen indicador, aunque si se puede ver que los clientes que se van tienen un CreditScore parcialmente más bajo.
+
 ![Distribución de CreditScore por Exited](/outputs/figures/creditscore_distribution_by_exited.png)
 
+
 - La mayor cantidad de clientes del banco son franceses, mientras que en Germany y Spain existe una cantidad muy similar.
+
 ![Cuenta de clientes por país](/outputs/figures/exited_by_geography_count.png)
 
+
 - Germany es el país con más churn de los 3 en relación de su cantidad de clientes.
+
 ![Cantidad de Exited por país](/outputs/figures/exited_by_geography_pies.png)
 
+
 - La mayor cantidad de clientes que han pasado por el banco son personas adultas entre los 35 a 40 años.
+
 ![Distribución de edades](/outputs/figures/age_distribution.png)
 
+
 - Se han separado por grupos etarios los clientes, a lo cual se ha llegado a la conclusión de que los clientes con un abandono notorio son los que tienen entre 45 y 60 años.
+
 ![Porcentaje de Exited por grupo de edad](outputs/figures/churn_by_ageGroup.png)
 
+
 - El tenure no es un buen indicador de Exited, aunque de todas formas, dentro de los clientes que se han ido, lo datos son un poco más variados.
+
 ![Distribución de tenure por Exited](outputs/figures/tenure_distribution_by_exited.png)
 
-- Dentro de este dataset casi todos los clientes tienen un Balance de 0, aunque existe una tendencia de tener un Balance de al rededor de los 125000
+
+- Dentro de este dataset casi todos los clientes tienen un Balance de 0, aunque existe una tendencia de tener un Balance de al rededor de los 125000.
+
 ![Distribución de Balance](outputs/figures/balance_distribution.png)
 
+
 - Dentro de los clientes que se quedan en el banco, es más común que tengan un balance de 0, mientras que los clientes que se van suelen tener un balance de al rededor de 120000.
+
 ![Distribución de Exited en Balance](outputs/figures/balance_distribution_for_exited.png)
 
+
 - Los que tienen balance se tienden a ir un 10% más que los que no lo tienen.
+
 ![Porcentaje de Exited por Balance](outputs/figures/exited_by_balance.png)
 
+
 - La mejor cantidad de productos que debería tener un cliente, es de 2, ya que con esta cantidad es mucho menos probable que abandone el banco. Además, las peores cantidades de productos son 3 y 4.
+
 ![Distribución de Exited por NumOfProducts](outputs/figures/churn_by_NumOfProducts.png)
 
+
 - No tiene relevancia tener o no tener tarjeta del banco.
+
 ![Distribución Exited con Card](outputs/figures/exited_by_HasCrCard_pie.png)
 
+
 - Los miembros no activos tienden a irse de manera más frecuente.
+
 ![Exited en IsActiveMember](outputs/figures/active_members_exited.png)
 
+
 - El salario estimado no tiene mucha incidencia dentro del abandono.
+
 ![Distribución de Salary en Exited](outputs/figures/exited_by_EstimatedSalary.png)
+
 
 ## ⚙️ Feature engineering
 - AgeGroup:
@@ -103,53 +131,79 @@ Se han realizado 2 versiónes para cada modelo, por lo cuál se presentarán cad
 Modelo de forma estándar y sin tuning. Se entiende que por un importante desbalanceo de clases, el modelo tiende a predecir que los usuarios no se irán, siendo un modelo muy conservador y que no atiende a las necesidades de la empresa. Debido a que el mayor objetivo es detectar quien abandona, no quien se queda.
 
 Métricas:
+
 Accuracy LogisticRegression_v1: 0.8485
+
 Precision LogisticRegression_v1: 0.6844262295081968
+
 F1 LogisticRegression_v1: 0.5243328100470958
+
 Recall LogisticRegression_v1: 0.42493638676844786
+
 Roc Auc LogisticRegression_v1: 0.688510508256657
 
 Matriz de confusión:
+
 ![Confusion matrix in LR V1](outputs/confusion_matrixs/confusion_matrix_logisticregression_v1.png)
+
 
 #### V2
 Utilizando tuning como lo es el aumento de iteraciones y balanceo de clases, se obtiene un modelo bastante mejor, capaz de encontrar más posibles clientes con potencial de abandono, aunque permite un número ligeramente considerable de falsos positivos.
 
 Métricas:
+
 Accuracy LogisticRegression_v2: 0.7485
+
 Precision LogisticRegression_v2: 0.42445054945054944
+
 F1 LogisticRegression_v2: 0.5512934879571811
+
 Recall LogisticRegression_v2: 0.7862595419847328
+
 Roc Auc LogisticRegression_v2: 0.7627626272462557
 
 Matriz de confusión:
+
 ![Confusion matrix in LR V2](outputs/confusion_matrixs/confusion_matrix_logisticregression_v2.png)
+
 
 ### Modelo RandomForestClassifier
 #### V1
 Modelo de forma estándar y sin tuning. Debido al desbalanceo, identifica casi al 50% de los clientes que efectivamente se van, aunque obtiene mejores capacidades iniciales que LogisticRegression siguen siendo insuficientes.
 
 Métricas:
+
 Accuracy RandomForestClassifier_v1: 0.8635
+
 Precision RandomForestClassifier_v1: 0.75
+
 F1 RandomForestClassifier_v1: 0.5687203791469194
+
 Recall RandomForestClassifier_v1: 0.4580152671755725
+
 Roc Auc RandomForestClassifier_v1: 0.7103393075143576
 
 Matriz de confusión:
+
 ![Confusion matrix in RFC V1](outputs/confusion_matrixs/confusion_matrix_randomforestclassifier_v1.png)
 
 #### V2
 Utilizando tuning, como lo es el aumento de n_estimators, balanceo de clases, etc. Se ha alcanzado un rendimiento superior considerando la cantidad de clientes identificados que se van, sin dar una cantidad muy comprometida de falsos positivos. Considerado como el mejor modelo en este ejercicio debido a su alineamiento con la intención final prioritaria de identificar a los clientes que se van.
 
 Métricas:
+
 Accuracy RandomForestClassifier_v2: 0.801
+
 Precision RandomForestClassifier_v2: 0.49592169657422513
+
 F1 RandomForestClassifier_v2: 0.6043737574552683
+
 Recall RandomForestClassifier_v2: 0.7735368956743003
+
 Roc Auc RandomForestClassifier_v2: 0.7906265685589922
 
 Matriz de confusión:
+
 ![Confusion matrix in RFC V1](outputs/confusion_matrixs/confusion_matrix_randomforestclassifier_v2.png)
 
 ## 🏆 Conclusiones finales y recomendaciones
